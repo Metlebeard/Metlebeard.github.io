@@ -1,127 +1,129 @@
 <!DOCTYPE html>
-<head>
-    <title>Seff's Scientific Calculator</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<script src="js/script.js"></script>
-<body>
-    <div class="calculator">
-        <div class="center"><h3>Scientific Calculator</h3><br><p class="credits">Created by: Seth English, 2021.</p></div>
-        
-        <div class="center">
-            <p class="modes" id="modes"></p>
-            <p class="modesThree" id="modesThree"></p>
-            <p class="modesTwo" id="modesTwo"></p>
-            <div class="compInput" id="compInput">
-                <input id="numInput">
-                <p class="numOutput" id="numOutput"></p>
+<html>
+    <head>
+        <title>Seff's Scientific Calculator</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <script src="js/script.js"></script>
+    <body>
+        <div class="calculator">
+            <div class="center"><h3>Scientific Calculator</h3><br><p class="credits">Created by: Seth English, 2021.</p></div>
+            
+            <div class="center">
+                <p class="modes" id="modes"></p>
+                <p class="modesThree" id="modesThree"></p>
+                <p class="modesTwo" id="modesTwo"></p>
+                <div class="compInput" id="compInput">
+                    <input id="numInput">
+                    <p class="numOutput" id="numOutput"></p>
+                </div>
+                <div class="statInput" id="statInput">
+                    <table class="statTable" id="statTable">
+                        <tr >
+                            <td class="statTableNum"></td>
+                            <td class="statTable">x</td>
+                            <td class="statTable">freq.</td>
+                        </tr>
+                        <tr>
+                            <td class="statTableNum">1</td>
+                            <td class="statTable"></td>
+                            <td class="statTable"></td>
+                        </tr>
+                    </table>
+                    <input class="statNumInput" id="statNumInput">
+                </div>
+                <div class="modeSelector" id="modeSelector">
+                    <p class="modeOutput" id="modeOutput"></p>
+                </div>
+                <div class="collider"></div>
             </div>
-            <div class="statInput" id="statInput">
-                <table class="statTable" id="statTable">
-                    <tr >
-                        <td class="statTableNum"></td>
-                        <td class="statTable">x</td>
-                        <td class="statTable">freq.</td>
+            <div class="center">
+                <table class="arrows">
+                    <tr>
+                        <td><p class="placeholder">.</p></td>
+                        <td><button class="arrows" onclick="">↑</button></td>
+                        <td><p class="placeholder">.</p></td>
                     </tr>
                     <tr>
-                        <td class="statTableNum">1</td>
-                        <td class="statTable"></td>
-                        <td class="statTable"></td>
+                        <td><button class="arrows" onclick="">←</button></td>
+                        <td><p class="placeholder">.</p></td>
+                        <td><button class="arrows" onclick="">→</button></td>
+                    </tr>
+                    <tr>
+                        <td><p class="placeholder">.</p></td>
+                        <td><button class="arrows" onclick="">↓</button></td>
+                        <td><p class="placeholder">.</p></td>
                     </tr>
                 </table>
-                <input class="statNumInput" id="statNumInput">
-            </div>
-            <div class="modeSelector" id="modeSelector">
-                <p class="modeOutput" id="modeOutput"></p>
-            </div>
-            <div class="collider"></div>
-        </div>
-        <div class="center">
-            <table class="arrows">
-                <tr>
-                    <td><p class="placeholder">.</p></td>
-                    <td><button class="arrows" onclick="">↑</button></td>
-                    <td><p class="placeholder">.</p></td>
-                </tr>
-                <tr>
-                    <td><button class="arrows" onclick="">←</button></td>
-                    <td><p class="placeholder">.</p></td>
-                    <td><button class="arrows" onclick="">→</button></td>
-                </tr>
-                <tr>
-                    <td><p class="placeholder">.</p></td>
-                    <td><button class="arrows" onclick="">↓</button></td>
-                    <td><p class="placeholder">.</p></td>
-                </tr>
+                <table class="scientific">
+                    <tr>
+                        <td><p class="placeholder">.</p><button class="shift" onclick="shiftButton()">SHIFT</button></td>
+                        <td><p class="placeholder">.</p><button class="alpha" onclick="alphaButton()">ALPHA</button></td>
+                        <td><p class="shiftText">CLR</p><button class="small" onclick="modeButton()">MODE</button></td>
+                        <td><p class="placeholder">.</p><button class="small" onclick="acButton()">ON</button></td>
+                    </tr>
+                    <tr>
+                        <td><p class="shiftText">x!</p><button class="small" onclick="button('^-1')">x^-1</button></td>
+                        <td><p class="shiftText">nPr</p><button class="small" onclick="button('c')">nCr</button></td>
+                        <td><p class="shiftText">Rec(</p><p class="alphaText">:</p><button class="small" onclick="button('Pol(')">Pol(</button></td>
+                        <td><p class="shiftText">d/c</p><button class="small" onclick="button('/')">a b/c</button></td>
+                    </tr>
+                    <tr>
+                        <td><p class="placeholder">.</p><button class="small" onclick="button('2√')">√</button></td>
+                        <td><p class="placeholder">.</p><button class="small" onclick="button('^2')">x^2</button></td>
+                        <td><p class="shiftText">3√</p><button class="small" onclick="button('^3')">x^3</button></td>
+                        <td><p class="shiftText">x√</p><button class="small" onclick="button('^')">y^x</button></td>
+                        <td><p class="shiftText">10^x</p><button class="small" onclick="button('log')">log</button></td>
+                        <td><p class="shiftText">e^x</p><p class="alphaText">e</p><button class="small" onclick="button('In')">In</button></td>
+                    </tr>
+                    <tr>
+                        <td><p class="alphaText">A</p><button class="small" onclick="button('-')">(-)</button></td>
+                        <td><p class="shiftText"><-</p><p class="alphaText">B</p><button class="small" onclick="button('°')">°'''</button></td>
+                        <td><p class="alphaText">C</p><button class="small" onclick="hypButton()">hyp</button></td>
+                        <td><p class="shiftText">sin^-1</p><p class="alphaText">D</p><button class="small" onclick="button('Sin')">sin</button></td>
+                        <td><p class="shiftText">cos^-1</p><p class="alphaText">E</p><button class="small" onclick="button('Cos')">cos</button></td>
+                        <td><p class="shiftText">tan^-1</p><p class="alphaText">F</p><button class="small" onclick="button('Tan')">tan</button></td>
+                    </tr>
+                    <tr>
+                        <td><p class="shiftText">STO</p><button class="small" onclick="">RCL</button></td>
+                        <td><p class="shiftText"><-</p><button class="small" onclick="">ENG</button></td>
+                        <td><p class="placeholder">.</p><button class="small" onclick="button('(')">(</button></td>
+                        <td><p class="alphaText">X</p><button class="small" onclick="button(')')">)</button></td>
+                        <td><p class="shiftText">;</p><p class="alphaText">Y</p><button class="small" onclick="button(',')">,</button></td>
+                        <td><p class="shiftText">M-</p><p class="alphaText">M</p><button class="small" onclick="button('M+')">M+</button></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td><p class="placeholder">.</p><button onclick="button('7')">7</button></td>
+                        <td><p class="placeholder">.</p><button onclick="button('8')">8</button></td>
+                        <td><p class="placeholder">.</p><button onclick="button('9')">9</button></td>
+                        <td><p class="shiftText">OFF</p><button class="light" onclick="acButton()">AC</button></td>
+                        <td><p class="shiftText">CLR</p><button class="light" onclick="delButton()">DEL</button></td>
+                    </tr>
+                    <tr>
+                        <td><p class="placeholder">.</p><button onclick="button('4')">4</button></td>
+                        <td><p class="placeholder">.</p><button onclick="button('5')">5</button></td>
+                        <td><p class="placeholder">.</p><button onclick="button('6')">6</button></td>
+                        <td><p class="placeholder">.</p><button onclick="button('×')">×</button></td>
+                        <td><p class="shiftText">INS</p><button onclick="button('÷')">÷</button></td>
+                    </tr>
+                    <tr>
+                        <td><p class="shiftText">SSUM</p><button onclick="button('1')">1</button></td>
+                        <td><p class="shiftText">SVAR</p><button onclick="button('2')">2</button></td>
+                        <td><p class="placeholder">.</p><button onclick="button('3')">3</button></td>
+                        <td><p class="placeholder">.</p><button onclick="button('+')">+</button></td>
+                        <td><p class="placeholder">.</p><button onclick="button('-')">-</button></td>
+                    </tr>
+                    <tr>
+                        <td><p class="shiftText">Rnd</p><button onclick="button('0')">0</button></td>
+                        <td><p class="shiftText">Ran#</p><button onclick="button('.')">.</button></td>
+                        <td><p class="shiftText">π</p><button onclick="button('EXP')">EXP</button></td>
+                        <td><p class="shiftText">DRG></p><button onclick="button('Ans')">Ans</button></td>
+                        <td><p class="shiftText">%</p><button onclick="equalsButton()">=</button></td>
+                    </tr>
             </table>
-            <table class="scientific">
-                <tr>
-                    <td><p class="placeholder">.</p><button class="shift" onclick="shiftButton()">SHIFT</button></td>
-                    <td><p class="placeholder">.</p><button class="alpha" onclick="alphaButton()">ALPHA</button></td>
-                    <td><p class="shiftText">CLR</p><button class="small" onclick="modeButton()">MODE</button></td>
-                    <td><p class="placeholder">.</p><button class="small" onclick="acButton()">ON</button></td>
-                </tr>
-                <tr>
-                    <td><p class="shiftText">x!</p><button class="small" onclick="button('^-1')">x^-1</button></td>
-                    <td><p class="shiftText">nPr</p><button class="small" onclick="button('c')">nCr</button></td>
-                    <td><p class="shiftText">Rec(</p><p class="alphaText">:</p><button class="small" onclick="button('Pol(')">Pol(</button></td>
-                    <td><p class="shiftText">d/c</p><button class="small" onclick="button('/')">a b/c</button></td>
-                </tr>
-                <tr>
-                    <td><p class="placeholder">.</p><button class="small" onclick="button('2√')">√</button></td>
-                    <td><p class="placeholder">.</p><button class="small" onclick="button('^2')">x^2</button></td>
-                    <td><p class="shiftText">3√</p><button class="small" onclick="button('^3')">x^3</button></td>
-                    <td><p class="shiftText">x√</p><button class="small" onclick="button('^')">y^x</button></td>
-                    <td><p class="shiftText">10^x</p><button class="small" onclick="button('log')">log</button></td>
-                    <td><p class="shiftText">e^x</p><p class="alphaText">e</p><button class="small" onclick="button('In')">In</button></td>
-                </tr>
-                <tr>
-                    <td><p class="alphaText">A</p><button class="small" onclick="button('-')">(-)</button></td>
-                    <td><p class="shiftText"><-</p><p class="alphaText">B</p><button class="small" onclick="button('°')">°'''</button></td>
-                    <td><p class="alphaText">C</p><button class="small" onclick="hypButton()">hyp</button></td>
-                    <td><p class="shiftText">sin^-1</p><p class="alphaText">D</p><button class="small" onclick="button('Sin')">sin</button></td>
-                    <td><p class="shiftText">cos^-1</p><p class="alphaText">E</p><button class="small" onclick="button('Cos')">cos</button></td>
-                    <td><p class="shiftText">tan^-1</p><p class="alphaText">F</p><button class="small" onclick="button('Tan')">tan</button></td>
-                </tr>
-                <tr>
-                    <td><p class="shiftText">STO</p><button class="small" onclick="">RCL</button></td>
-                    <td><p class="shiftText"><-</p><button class="small" onclick="">ENG</button></td>
-                    <td><p class="placeholder">.</p><button class="small" onclick="button('(')">(</button></td>
-                    <td><p class="alphaText">X</p><button class="small" onclick="button(')')">)</button></td>
-                    <td><p class="shiftText">;</p><p class="alphaText">Y</p><button class="small" onclick="button(',')">,</button></td>
-                    <td><p class="shiftText">M-</p><p class="alphaText">M</p><button class="small" onclick="button('M+')">M+</button></td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td><p class="placeholder">.</p><button onclick="button('7')">7</button></td>
-                    <td><p class="placeholder">.</p><button onclick="button('8')">8</button></td>
-                    <td><p class="placeholder">.</p><button onclick="button('9')">9</button></td>
-                    <td><p class="shiftText">OFF</p><button class="light" onclick="acButton()">AC</button></td>
-                    <td><p class="shiftText">CLR</p><button class="light" onclick="delButton()">DEL</button></td>
-                </tr>
-                <tr>
-                    <td><p class="placeholder">.</p><button onclick="button('4')">4</button></td>
-                    <td><p class="placeholder">.</p><button onclick="button('5')">5</button></td>
-                    <td><p class="placeholder">.</p><button onclick="button('6')">6</button></td>
-                    <td><p class="placeholder">.</p><button onclick="button('×')">×</button></td>
-                    <td><p class="shiftText">INS</p><button onclick="button('÷')">÷</button></td>
-                </tr>
-                <tr>
-                    <td><p class="shiftText">SSUM</p><button onclick="button('1')">1</button></td>
-                    <td><p class="shiftText">SVAR</p><button onclick="button('2')">2</button></td>
-                    <td><p class="placeholder">.</p><button onclick="button('3')">3</button></td>
-                    <td><p class="placeholder">.</p><button onclick="button('+')">+</button></td>
-                    <td><p class="placeholder">.</p><button onclick="button('-')">-</button></td>
-                </tr>
-                <tr>
-                    <td><p class="shiftText">Rnd</p><button onclick="button('0')">0</button></td>
-                    <td><p class="shiftText">Ran#</p><button onclick="button('.')">.</button></td>
-                    <td><p class="shiftText">π</p><button onclick="button('EXP')">EXP</button></td>
-                    <td><p class="shiftText">DRG></p><button onclick="button('Ans')">Ans</button></td>
-                    <td><p class="shiftText">%</p><button onclick="equalsButton()">=</button></td>
-                </tr>
-        </table>
+            </div>
         </div>
-    </div>
-</body>
+    </body>
+</html>
