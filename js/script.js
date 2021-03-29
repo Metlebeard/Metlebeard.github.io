@@ -9,11 +9,18 @@ var modeTwo = 'D';
 var modePressedAmount = 0;
 var statTypes = false;
 
+var selectedCellX = 0;
+var selectedCellY = 0;
+var stats = [[0, 0]];
+
 var calc = [];
 
 function button(type)
 {
-    var input = document.getElementById('numInput');
+    if (calcMode === "MATH")
+        var input = document.getElementById('numInput');
+    else if (calcMode === "STAT")
+        var input = document.getElementById('statNumInput');
 
     if (modePressedAmount != 0)
     {
@@ -76,6 +83,7 @@ function button(type)
             statTypes = false;
             var output = document.getElementById('modeOutput');
             output.textContent = '';
+            selectCell();
             screenMove();
             return;
         }
@@ -265,7 +273,10 @@ function delButton()
         acButton();
         return;
     }
-    var input = document.getElementById('numInput');
+    if (calcMode === "MATH")
+        var input = document.getElementById('numInput');
+    else if (calcMode === "STAT")
+        var input = document.getElementById('statNumInput');
     var num = input.value
     var newNum = num.substring(0, num.length - 1);
     input.value = newNum;
@@ -277,6 +288,15 @@ function delButton()
 
 function equalsButton()
 {
+    if (calcMode === "STAT")
+    {
+        var input = document.getElementById('statNumInput');
+        var cell = document.getElementById(selectedCellX + "|" + selectedCellY);
+        stats[selectedCellY][selectedCellX] = Number(input.value);
+        cell.textContent = input.value;
+        input.value = "";
+        return;
+    }
     if (shiftMode)
     {
         var input = document.getElementById('numInput');
@@ -1284,7 +1304,144 @@ function inverseSetToDegrees(degrees)
     return degrees * 180 / Math.PI;
 }
 
-if (32 % 1 === 0)
+function selectCell()
 {
-    console.log('yes');
+    var cell = document.getElementById(selectedCellX + "|" + selectedCellY);
+    cell.classList.replace("statTable", "selectedTable");
+}
+
+function arrow(dir)
+{
+    var cell = document.getElementById(selectedCellX + "|" + selectedCellY);
+    cell.classList.replace("selectedTable", "statTable");
+    if (dir === "up")
+    {
+        if (selectedCellY === 0)
+        {
+            
+        }
+        else
+        {
+            selectedCellY--;
+            var table = document.getElementById('statTable');
+                while (table.firstChild)
+                {
+                    table.removeChild(table.lastChild);
+                }
+                var numTableOne = document.createElement("td");
+                numTableOne.classList.add('statTableNum');
+                var tableXZero = document.createElement("td");
+                tableXZero.classList.add('statTable');
+                tableXZero.textContent = "x";
+                var tableXOne = document.createElement("td");
+                tableXOne.classList.add('statTable');
+                tableXOne.textContent = "freq.";
+                var tableRow = document.createElement("tr");
+                tableRow.appendChild(numTableOne);
+                tableRow.appendChild(tableXZero);
+                tableRow.appendChild(tableXOne);
+                table.appendChild(tableRow);
+
+                var numTableTwo = document.createElement("td");
+                numTableTwo.classList.add('statTableNum');
+                numTableTwo.textContent = selectedCellY+1;
+                var tableXZero = document.createElement("td");
+                tableXZero.classList.add('statTable');
+                if (stats[selectedCellY])
+                    tableXZero.textContent = stats[selectedCellY][0];
+                else
+                {
+                    var newRow = [0, 0];
+                    stats.push(newRow);
+                }
+                tableXZero.setAttribute("id", (0 + "|" + selectedCellY));
+                var tableXOne = document.createElement("td");
+                tableXOne.classList.add('statTable');
+                if (stats[selectedCellY])
+                    tableXOne.textContent = stats[selectedCellY][1];
+                tableXOne.setAttribute("id", (1 + "|" + selectedCellY));
+                var tableRow = document.createElement("tr");
+                tableRow.appendChild(numTableTwo);
+                tableRow.appendChild(tableXZero);
+                tableRow.appendChild(tableXOne);
+                table.appendChild(tableRow);
+        }
+    }
+    else if (dir === "down")
+    {
+        if (selectedCellY === stats.length-1 && stats[stats.length-1][0] === 0)
+        {
+            
+        }
+        else
+        {
+            selectedCellY++;
+                var table = document.getElementById('statTable');
+                while (table.firstChild)
+                {
+                    table.removeChild(table.lastChild);
+                }
+                var numTableOne = document.createElement("td");
+                numTableOne.classList.add('statTableNum');
+                var tableXZero = document.createElement("td");
+                tableXZero.classList.add('statTable');
+                tableXZero.textContent = "x";
+                var tableXOne = document.createElement("td");
+                tableXOne.classList.add('statTable');
+                tableXOne.textContent = "freq.";
+                var tableRow = document.createElement("tr");
+                tableRow.appendChild(numTableOne);
+                tableRow.appendChild(tableXZero);
+                tableRow.appendChild(tableXOne);
+                table.appendChild(tableRow);
+
+                var numTableTwo = document.createElement("td");
+                numTableTwo.classList.add('statTableNum');
+                numTableTwo.textContent = selectedCellY+1;
+                var tableXZero = document.createElement("td");
+                tableXZero.classList.add('statTable');
+                if (stats[selectedCellY])
+                    tableXZero.textContent = stats[selectedCellY][0];
+                else
+                {
+                    var newRow = [0, 0];
+                    stats.push(newRow);
+                }
+                tableXZero.setAttribute("id", (0 + "|" + selectedCellY));
+                var tableXOne = document.createElement("td");
+                tableXOne.classList.add('statTable');
+                if (stats[selectedCellY])
+                    tableXOne.textContent = stats[selectedCellY][1];
+                tableXOne.setAttribute("id", (1 + "|" + selectedCellY));
+                var tableRow = document.createElement("tr");
+                tableRow.appendChild(numTableTwo);
+                tableRow.appendChild(tableXZero);
+                tableRow.appendChild(tableXOne);
+                table.appendChild(tableRow);
+        }
+    }
+    else if (dir === "left")
+    {
+        if (selectedCellX === 0)
+        {
+            
+        }
+        else
+        {
+            selectedCellX--;
+        }
+    }
+    else if (dir === "right")
+    {
+        if (selectedCellX === 1)
+        {
+
+        }
+        else
+        {
+            selectedCellX++;
+        }
+    }
+    cell = document.getElementById(selectedCellX + "|" + selectedCellY);
+    cell.classList.replace("statTable", "selectedTable");
 }

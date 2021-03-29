@@ -19,15 +19,15 @@
                 </div>
                 <div class="statInput" id="statInput">
                     <table class="statTable" id="statTable">
-                        <tr >
+                        <tr>
                             <td class="statTableNum"></td>
                             <td class="statTable">x</td>
                             <td class="statTable">freq.</td>
                         </tr>
                         <tr>
                             <td class="statTableNum">1</td>
-                            <td class="statTable"></td>
-                            <td class="statTable"></td>
+                            <td class="statTable" id="0|0"></td>
+                            <td class="statTable" id="1|0"></td>
                         </tr>
                     </table>
                     <input class="statNumInput" id="statNumInput">
@@ -41,17 +41,17 @@
                 <table class="arrows">
                     <tr>
                         <td><p class="placeholder">.</p></td>
-                        <td><button class="arrows" onclick="">↑</button></td>
+                        <td><button class="arrows" onclick="arrow('up')">↑</button></td>
                         <td><p class="placeholder">.</p></td>
                     </tr>
                     <tr>
-                        <td><button class="arrows" onclick="">←</button></td>
+                        <td><button class="arrows" onclick="arrow('left')">←</button></td>
                         <td><p class="placeholder">.</p></td>
-                        <td><button class="arrows" onclick="">→</button></td>
+                        <td><button class="arrows" onclick="arrow('right')">→</button></td>
                     </tr>
                     <tr>
                         <td><p class="placeholder">.</p></td>
-                        <td><button class="arrows" onclick="">↓</button></td>
+                        <td><button class="arrows" onclick="arrow('down')">↓</button></td>
                         <td><p class="placeholder">.</p></td>
                     </tr>
                 </table>
