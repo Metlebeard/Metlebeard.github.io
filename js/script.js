@@ -57,7 +57,7 @@ function button(type)
                     statTypes = true;
                     var output = document.getElementById('modeOutput');
                     output.style.fontSize = "15px";
-                    output.textContent = '1:1-VAR 2:a+bX 3:_+cX2 4:In X 5:e^x 6:a•b^x 7:a•X•b 8:1/x';
+                    output.textContent = '1:1-VAR';
                     return;
                     break;
                 case 2:
@@ -1312,6 +1312,8 @@ function selectCell()
 
 function arrow(dir)
 {
+    if (calcMode != "STAT")
+        return;
     var cell = document.getElementById(selectedCellX + "|" + selectedCellY);
     cell.classList.replace("selectedTable", "statTable");
     if (dir === "up")
